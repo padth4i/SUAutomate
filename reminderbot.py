@@ -1,3 +1,4 @@
+from datetime import datetime
 import json
 import requests
 import smtplib
@@ -30,6 +31,8 @@ def send_message(text, chat_id):
     url = URL + "sendMessage?text={}&chat_id={}".format(text, chat_id)
     get_url(url)
 
-text = "Good evening! Don't forget to push today's status update.\nUse the following format: \n\n\tSUBJECT: Status Update [DD-MM-YYYY]\n\tWork Done: *****\n\tPlanned: *****\n\tBlockers: *****\n\nRemember to send detailed updates about your progress today. Thank you!"
+now = datetime.now()
+todays_date = now.strftime("%d/%m")
+text = "Good evening! Don't forget to push today's status update.\nUse the following format: \n\n\tSUBJECT: Status Update [" +  todays_date + "/2019]\n\tWork Done: *****\n\tPlanned: *****\n\tBlockers: *****\n\nRemember to send detailed updates about your progress today. Thank you!"
 chat = get_last_chat_id(get_updates())
 send_message(text, chat)
